@@ -25,25 +25,42 @@ var gImgs = [
     }
 ];
 
+var gCanvas;
+var gCtx;
+var gPos = {};
+
 var gMeme = {
     selectedImgId: 2,
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I never eat Falafel',
-            size: 20,
-            align: 'left',
-            color: 'red'
+            txt: 'bla bla',
+            size: 40,
+            align: 'center',
+            color: 'black'
+
         }
     ]
 }
 
-var gCanvas;
-var gCtx;
+
+function onMoveLine(direc) {
+    if (direc === 'get-up') {
+
+        gPos.y -= 5;
+
+    } else {
+
+        gPos.y += 5;
+
+    }
+    renderCanvas();
+}
 
 function oninit() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
+    gPos = { x: gCanvas.width / 2, y: gCanvas.height / 8 };
 }
 
 function onImageClicked(imgId) {
@@ -54,14 +71,17 @@ function onImageClicked(imgId) {
 }
 
 
+
+
 function onDrawText() {
 
-    drawText(gMeme.lines[0].txt, gCanvas.width / 2, gCanvas.height / 8);
+    drawText(gMeme.lines[0].txt, gPos.x, gPos.y);
 }
 
 
 
 function onInputText(txt) {
+    onImageClicked(gMeme.selectedImgId);
     gMeme.lines[0].txt = txt;
     setTimeout(() => {
         onDrawText()
@@ -69,5 +89,12 @@ function onInputText(txt) {
 
     var elMemeText = document.getElementById('meme-text');
     elMemeText.value = '';
+
+}
+
+function onTextSize(size) {
+
+    memeTextSize(size);
+    renderCanvas();
 
 }

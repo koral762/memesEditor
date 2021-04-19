@@ -24,7 +24,40 @@ canvas{
     justify-content: wrap;
 }
 
-.image-container>*{
+.image-container img{
     width: 200px;
     height: 200px;
+    cursor: pointer;
+    margin-inline-end: 1em;
+}
+
+button{
+    cursor: pointer;
+}
+
+@media (max-width: 450px){
+    
+    header{
+        background-color: rgb(14, 218, 31);
+    }
+    
+    canvas{
+        height: 300px;
+        width: 300px;
+    }
+    
+    .canvas-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1em;
+    }
+    
+    .image-container img{
+        width: 150px;
+        height: 150px;
+    }
+
+    
 }
