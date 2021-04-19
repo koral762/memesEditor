@@ -9,12 +9,30 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="oninit()">
 
     <header>
         <div class="logo">Meme editor</div>
     </header>
 
+    <div class="canvas-container">
+        <canvas id="my-canvas" height="450" width="450" ></canvas>
+
+        <div class="task-container">
+
+            <input type="text" onchange="onInputText(value)" id="meme-text" placeholder="text.."></input>
+
+        </div>
+    </div>
+
+    <div class="Image-Gallery">
+
+        <div class="image-container">
+            <img src="img/1.jpg" id="1" onclick="onImageClicked(this.id)">
+            <img src="img/2.jpg" id="2" onclick="onImageClicked(this.id)">
+        </div>
+
+    </div>
 
     <script src="js/memeService.js"></script>
     <script src="js/main.js"></script>

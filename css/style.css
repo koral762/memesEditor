@@ -2,3 +2,29 @@
     box-sizing: border-box;
 }
 
+header{
+    background-color: rgb(218, 14, 14);
+    height: 50px;
+    margin-bottom: 1em;
+}
+
+canvas{
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.canvas-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.image-container{
+    display: flex;
+    justify-content: wrap;
+}
+
+.image-container>*{
+    width: 200px;
+    height: 200px;
+}
