@@ -28,6 +28,7 @@ var gImgs = [
 var gCanvas;
 var gCtx;
 var gPos = {};
+var gCurrMeme = {};
 
 var gMeme = {
     selectedImgId: 2,
@@ -37,12 +38,42 @@ var gMeme = {
             txt: 'bla bla',
             size: 40,
             align: 'center',
-            color: 'black'
+            color: 'black',
+            pos: {}
 
         }
+
     ]
 }
 
+
+function oninit() {
+    gCanvas = document.getElementById('my-canvas')
+    gCtx = gCanvas.getContext('2d')
+    gMeme.lines[gMeme.selectedLineIdx].pos = { x: gCanvas.width / 2, y: gCanvas.height / 8 };
+    gPos = gMeme.lines[gMeme.selectedLineIdx].pos;
+}
+
+function onImageClicked(imgId) {
+
+    gMeme.selectedImgId = parseInt(imgId);
+    renderImgToCanvas(gMeme.selectedImgId);
+
+}
+
+function onDrawText() {
+    var textIndex = gMeme.selectedLineIdx;
+
+    drawText(gMeme.lines[textIndex].txt, gPos.x, gPos.y);
+}
+
+
+function onAddTextLine() {
+
+    gMeme.lines.push(createLine());
+    renderCanvas();
+    console.log(gMeme.lines);
+}
 
 function onMoveLine(direc) {
     if (direc === 'get-up') {
@@ -56,28 +87,6 @@ function onMoveLine(direc) {
     }
     renderCanvas();
 }
-
-function oninit() {
-    gCanvas = document.getElementById('my-canvas')
-    gCtx = gCanvas.getContext('2d')
-    gPos = { x: gCanvas.width / 2, y: gCanvas.height / 8 };
-}
-
-function onImageClicked(imgId) {
-
-    gMeme.selectedImgId = parseInt(imgId);
-    renderImgToCanvas(gMeme.selectedImgId);
-
-}
-
-
-
-
-function onDrawText() {
-
-    drawText(gMeme.lines[0].txt, gPos.x, gPos.y);
-}
-
 
 
 function onInputText(txt) {
