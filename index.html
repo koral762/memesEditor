@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme editor</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body onload="oninit()">
@@ -21,23 +22,46 @@
         <div class="task-container">
 
             <input type="text" onchange="onInputText(value)" id="meme-text" placeholder="text.."></input>
-            <div class="buttons">
+            <div class="buttons task-container">
+                <button id="get-up" onclick="onMoveLine(this.id)"><i class="fa fa-caret-up" style="font-size:20px;"></i></button>
+                <button id="get-down" onclick="onMoveLine(this.id)"><i class="fa fa-caret-down" style="font-size:20px;"></i></button>
+                <button onclick="onAddTextLine()"><i class="fa fa-plus" style="font-size:20px;"></i></button>
+                <button onclick="onSwitchLine()"><i class="fa fa-arrows-alt" style="font-size:20px;"></i></button>
+                <button onclick="onRemoveLine()"><i class="fa fa-trash-o" style="font-size:20px;"></i></button>
+                
+            </div>
+            <div class="text-editor buttons task-container">
                 <button id="get-bigger" onclick="onTextSize(this.id)">A+</button>
                 <button id="get-smaller" onclick="onTextSize(this.id)">A-</button>
-                <button id="get-up" onclick="onMoveLine(this.id)">⬆</button>
-                <button id="get-down" onclick="onMoveLine(this.id)">⬇</button>
-                <button onclick="onAddTextLine()">➕</button>
-                <button onclick="onSwitchLine()">⬆⬇</button>
+        
+                <button id="get-left" onclick="onTextAlighn(this.id)"><i class="fa fa-align-left" style="font-size:20px;"></i></button>
+                <button id="get-center" onclick="onTextAlighn(this.id)"><i class="fa fa-align-justify" style="font-size:20px;"></i></button>
+                <button id="align-right" onclick="onTextAlighn(this.id)"><i class="fa fa-align-right" style="font-size:20px;"></i></button>
             </div>
 
+            <div class="font-editor" style="margin-top: 0.5em;">
+                <select onchange="onFontEdit(value)" style="width: 100px;">
+                    <option value="IMPACT">IMPACT</option>
+                    <option value="Arial">Arial</option>
+                    <option value="David">David</option>
+                    <option value="Brush Script MT">Brush</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                </select>
+
+                <input type="color" onchange="onTextColor(value)">
+
+            </div>
+            <div class="save-meme" style="margin-top: 0.5em;">
+                <button style="width: 150px;">Save meme</button>
+            </div>
         </div>
     </div>
 
     <div class="Image-Gallery">
 
         <div class="image-container">
-            <img src="img/1.jpg" id="1" onclick="onImageClicked(this.id)">
-            <img src="img/2.jpg" id="2" onclick="onImageClicked(this.id)">
+        
         </div>
 
     </div>

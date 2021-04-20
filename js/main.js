@@ -22,7 +22,78 @@ var gImgs = [
         id: 4,
         url: 'img/4.jpg',
         keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 5,
+        url: 'img/5.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 6,
+        url: 'img/6.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 7,
+        url: 'img/7.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 8,
+        url: 'img/8.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 9,
+        url: 'img/9.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 10,
+        url: 'img/10.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 11,
+        url: 'img/11.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 12,
+        url: 'img/12.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 13,
+        url: 'img/13.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 14,
+        url: 'img/14.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 15,
+        url: 'img/15.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 16,
+        url: 'img/16.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 17,
+        url: 'img/17.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
+    },
+    {
+        id: 18,
+        url: 'img/18.jpg',
+        keywords: ['sleep', 'cat', 'keyboard', 'bored']
     }
+
 ];
 
 var gElCanvas;
@@ -30,8 +101,7 @@ var gCtx;
 var gCurrPos = {};
 var gCurrLine = {};
 var gStartPos;
-const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
-
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 
 var gMeme = {
@@ -44,8 +114,9 @@ var gMeme = {
             align: 'center',
             color: 'black',
             pos: {},
-            isDragging: false
-
+            isDragging: false,
+            selected: true,
+            font:'IMPACT'
         },
         {
             txt: 'text2',
@@ -53,8 +124,9 @@ var gMeme = {
             align: 'center',
             color: 'black',
             pos: {},
-            isDragging: false
-
+            isDragging: false,
+            selected: false,
+            font:'IMPACT'
         }
 
     ]
@@ -64,11 +136,23 @@ var gMeme = {
 function oninit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
+    renderImages();
     gCurrLine = gMeme.lines[gMeme.selectedLineIdx];
-
     setFirstPos();
     addListeners();
+}
 
+function renderImages() {
+    var elImagesContainer = document.querySelector('.image-container');
+
+    var strHtml = '';
+
+    for(var i=1; i<=gImgs.length;i++){
+        
+        strHtml += ` <img src="img/${i}.jpg" id="${i}" onclick="onImageClicked(this.id)">`
+    }
+
+    elImagesContainer.innerHTML = strHtml;
 }
 
 function onImageClicked(imgId) {
@@ -84,7 +168,7 @@ function onDrawText() {
     var textIndex = gMeme.selectedLineIdx;
     gCurrPos = gMeme.lines[textIndex].pos;
 
-    drawText(gMeme.lines[textIndex].txt, gCurrPos.x, gCurrPos.y,textIndex);
+    drawText(gMeme.lines[textIndex].txt, gCurrPos.x, gCurrPos.y, textIndex);
 }
 
 
@@ -104,7 +188,14 @@ function onSwitchLine() {
     console.log(gMeme.selectedLineIdx);
     gCurrLine = gMeme.lines[gMeme.selectedLineIdx];
     gCurrPos = gMeme.lines[gMeme.selectedLineIdx].pos;
+    renderCanvas();
+}
 
+function onRemoveLine() {
+
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+    gMeme.selectedLineIdx = 0;
+    renderCanvas();
 }
 
 
@@ -138,8 +229,26 @@ function onTextSize(size) {
 
     memeTextSize(size);
     renderCanvas();
-
 }
+
+function onTextAlighn(align) {
+
+    memeTextAlighn(align);
+    renderCanvas();
+}
+
+function onFontEdit(font){
+
+    memeTextFont(font);
+    renderCanvas();
+}
+
+function onTextColor(color){
+
+    memeTextColor(color);
+    renderCanvas();
+}
+
 
 
 ///////////////////////  Listeners  ///////////////////////////
@@ -167,8 +276,9 @@ function onDown(ev) {
     gCurrLine.isDragging = true
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
-
 }
+
+
 
 function onMove(ev) {
     if (gCurrLine.isDragging) {

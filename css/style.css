@@ -19,16 +19,21 @@ canvas{
     margin-bottom: 1em;
 }
 
-.image-container{
+
+.image-gallery{
+
     display: flex;
     justify-content: wrap;
 }
+
+
 
 .image-container img{
     width: 200px;
     height: 200px;
     cursor: pointer;
     margin-inline-end: 1em;
+    border-radius: 1em;
 }
 
 .buttons{
@@ -60,10 +65,10 @@ button{
         align-items: center;
         margin-bottom: 1em;
     }
-    
+
     .image-container img{
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
     }
 
     
