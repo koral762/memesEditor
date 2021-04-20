@@ -21,11 +21,14 @@
         <div class="task-container">
 
             <input type="text" onchange="onInputText(value)" id="meme-text" placeholder="text.."></input>
-            <button id="get-bigger" onclick="onTextSize(this.id)">A+</button>
-            <button id="get-smaller" onclick="onTextSize(this.id)">A-</button>
-            <button id="get-up" onclick="onMoveLine(this.id)">⬆</button>
-            <button id="get-down" onclick="onMoveLine(this.id)">⬇</button>
-            <button onclick="onAddTextLine()">+</button>
+            <div class="buttons">
+                <button id="get-bigger" onclick="onTextSize(this.id)">A+</button>
+                <button id="get-smaller" onclick="onTextSize(this.id)">A-</button>
+                <button id="get-up" onclick="onMoveLine(this.id)">⬆</button>
+                <button id="get-down" onclick="onMoveLine(this.id)">⬇</button>
+                <button onclick="onAddTextLine()">➕</button>
+                <button onclick="onSwitchLine()">⬆⬇</button>
+            </div>
 
         </div>
     </div>

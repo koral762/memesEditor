@@ -1,5 +1,12 @@
 'use strict'
 
+function setFirstPos() {
+    gMeme.lines[0].pos = { x: gElCanvas.width / 2, y: gElCanvas.height / 8 };
+    gMeme.lines[1].pos = { x: gElCanvas.width / 2, y: gElCanvas.height - 20 };
+    gCurrPos = gMeme.lines[0].pos;
+}
+
+
 function renderImgToCanvas(imgId) {
 
     var elImg = getImgById(imgId);
@@ -8,31 +15,31 @@ function renderImgToCanvas(imgId) {
     var img = new Image();
     img.src = elImg;
     img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     }
 
 }
 
-function createLine(text = 'text', posX = gCanvas.width / 2, posY = gCanvas.height / 2) {
+function createLine(text = 'text', posX = gElCanvas.width / 2, posY = gElCanvas.height / 2) {
 
     return {
         txt: text,
         size: 40,
         align: 'center',
         color: 'black',
-        pos: { x: posX, y: posY }
-
+        pos: { x: posX, y: posY },
+        isDragging: false
     }
 }
 
-function drawText(text, x, y, textIndex = 0) {
-
+function drawText(text, x, y, textindx) {
+    console.log(textindx);
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = gMeme.lines[textIndex].color;
+    gCtx.strokeStyle = gMeme.lines[textindx].color
     gCtx.fillStyle = 'white'
-    gCtx.font = `${gMeme.lines[textIndex].size}px IMPACT`
+    gCtx.font = `${gMeme.lines[textindx].size}px IMPACT`
 
-    gCtx.textAlign = gMeme.lines[textIndex].align;
+    gCtx.textAlign = gMeme.lines[textindx].align;
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
 }
@@ -48,10 +55,10 @@ function getImgById(imgId) {
 function memeTextSize(size) {
     if (size === 'get-bigger') {
 
-        gMeme.lines[0].size += 5;
+        gMeme.lines[gMeme.selectedLineIdx].size += 5;
     } else {
 
-        gMeme.lines[0].size -= 5;
+        gMeme.lines[gMeme.selectedLineIdx].size -= 5;
     }
 
 }
@@ -79,6 +86,12 @@ function renderText() {
     });
 
 }
+
+
+
+
+
+
 
 
 

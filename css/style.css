@@ -31,8 +31,15 @@ canvas{
     margin-inline-end: 1em;
 }
 
+.buttons{
+    margin-top: 0.5em;
+}
+
 button{
     cursor: pointer;
+    width: 2em;
+    height: 2em;
+    padding: 0;
 }
 
 @media (max-width: 450px){
