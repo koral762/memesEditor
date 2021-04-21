@@ -106,6 +106,8 @@ function renderCanvas() {
     }, 200);
     gCtx.restore()
 
+    saveToStorage(KEY, gMeme);
+
 }
 
 function renderText() {
@@ -116,6 +118,7 @@ function renderText() {
         drawText(line.txt, line.pos.x, line.pos.y, textIndex);
         textIndex++;
     });
+    saveToStorage(KEY, gMeme);
 
 }
 

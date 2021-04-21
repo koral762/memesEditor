@@ -102,6 +102,7 @@ var gCurrPos = {};
 var gCurrLine = {};
 var gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
+var gmems = [];
 
 
 var gMeme = {
@@ -116,7 +117,7 @@ var gMeme = {
             pos: {},
             isDragging: false,
             selected: true,
-            font:'IMPACT'
+            font: 'IMPACT'
         },
         {
             txt: 'text2',
@@ -126,7 +127,7 @@ var gMeme = {
             pos: {},
             isDragging: false,
             selected: false,
-            font:'IMPACT'
+            font: 'IMPACT'
         }
 
     ]
@@ -138,8 +139,20 @@ function oninit() {
     gCtx = gElCanvas.getContext('2d')
     renderImages();
     gCurrLine = gMeme.lines[gMeme.selectedLineIdx];
-    setFirstPos();
+    viewFromStorage();
     addListeners();
+}
+
+function viewFromStorage() {
+
+    if (!loadFromStorage(KEY)) {
+        saveToStorage(KEY, gMeme)
+        setFirstPos();
+    } else {
+        gMeme = loadFromStorage(KEY);
+        gCurrPos = gMeme.lines[0].pos;
+        renderCanvas();
+    }
 }
 
 function renderImages() {
@@ -147,8 +160,8 @@ function renderImages() {
 
     var strHtml = '';
 
-    for(var i=1; i<=gImgs.length;i++){
-        
+    for (var i = 1; i <= gImgs.length; i++) {
+
         strHtml += ` <img src="img/${i}.jpg" id="${i}" onclick="onImageClicked(this.id)">`
     }
 
@@ -162,6 +175,7 @@ function onImageClicked(imgId) {
     setTimeout(() => {
         renderText()
     }, 200);
+
 }
 
 function onDrawText() {
@@ -237,19 +251,65 @@ function onTextAlighn(align) {
     renderCanvas();
 }
 
-function onFontEdit(font){
+function onFontEdit(font) {
 
     memeTextFont(font);
     renderCanvas();
 }
 
-function onTextColor(color){
+function onTextColor(color) {
 
     memeTextColor(color);
     renderCanvas();
 }
 
+function onSaveMeme() {
 
+    clearSelected();
+
+    if (!loadFromStorage(gmems)) {
+
+        gmems.push(gMeme);
+        saveToStorage(KEY2, gmems);
+
+    } else {
+        gmems.push(gMeme);
+        saveToStorage(KEY2, gmems);
+    }
+}
+
+function onDownloadImg() {
+
+    clearSelected();
+
+    setTimeout(() => {
+        downloadimg();
+    }, 1000);
+
+
+}
+
+function downloadimg(){
+    
+    var download = document.getElementById("download");
+    var image = document.getElementById("my-canvas").toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
+    
+    download.setAttribute("href", image);
+
+}
+
+function clearSelected() {
+    gMeme.selectedLineIdx = -1;
+    renderCanvas();
+}
+
+function onEdit(){
+    
+    gMeme.selectedLineIdx = 0;
+    renderCanvas();
+
+}
 
 ///////////////////////  Listeners  ///////////////////////////
 
