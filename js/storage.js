@@ -14,3 +14,35 @@ function loadFromStorage(key) {
     return val;
 }
 
+
+function removeFromStorage(key) {
+    localStorage.removeItem(key)
+}
+
+var gTemp = {
+    selectedImgId: 1,
+    selectedLineIdx: 0,
+    lines: [
+        {
+            txt: 'text1',
+            size: 40,
+            align: 'center',
+            color: 'black',
+            pos: {},
+            isDragging: false,
+            selected: true,
+            font: 'IMPACT'
+        },
+        {
+            txt: 'text2',
+            size: 40,
+            align: 'center',
+            color: 'black',
+            pos: {},
+            isDragging: false,
+            selected: false,
+            font: 'IMPACT'
+        }
+
+    ]
+}

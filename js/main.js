@@ -105,40 +105,15 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 var gmems = [];
 
 
-var gMeme = {
-    selectedImgId: 2,
-    selectedLineIdx: 0,
-    lines: [
-        {
-            txt: 'text1',
-            size: 40,
-            align: 'center',
-            color: 'black',
-            pos: {},
-            isDragging: false,
-            selected: true,
-            font: 'IMPACT'
-        },
-        {
-            txt: 'text2',
-            size: 40,
-            align: 'center',
-            color: 'black',
-            pos: {},
-            isDragging: false,
-            selected: false,
-            font: 'IMPACT'
-        }
-
-    ]
-}
+var gMeme = gTemp;
 
 function oninit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
-    renderImages();
-    gCurrLine = gMeme.lines[gMeme.selectedLineIdx];
+
     viewFromStorage();
+    gCurrLine = gMeme.lines[gMeme.selectedLineIdx];
+    renderImages();
     addListeners();
 }
 
@@ -147,9 +122,12 @@ function viewFromStorage() {
     if (!loadFromStorage(KEY)) {
         saveToStorage(KEY, gMeme)
         setFirstPos();
+
     } else {
         gMeme = loadFromStorage(KEY);
-        gCurrPos = gMeme.lines[0].pos;
+
+        if (gMeme.selectedLineIdx < 0) { gMeme.selectedLineIdx = 0 };
+        gCurrPos = gMeme.lines[gMeme.selectedLineIdx].pos;
         renderCanvas();
     }
 }
@@ -169,6 +147,11 @@ function renderImages() {
 
 function onImageClicked(imgId) {
 
+    var elContainer = document.querySelector('.canvas-container')
+    elContainer.style.display = 'flex'
+    var elImgs = document.querySelector('.Image-Gallery')
+    elImgs.style.display = 'none'
+    
     gMeme.selectedImgId = parseInt(imgId);
     renderImgToCanvas(gMeme.selectedImgId);
 
@@ -176,6 +159,16 @@ function onImageClicked(imgId) {
         renderText()
     }, 200);
 
+}
+
+function onReturnGallery() {
+
+    removeFromStorage(KEY);
+
+    var elContainer = document.querySelector('.canvas-container')
+    elContainer.style.display = 'none'
+    var elImgs = document.querySelector('.Image-Gallery')
+    elImgs.style.display = 'grid'
 }
 
 function onDrawText() {
@@ -196,6 +189,7 @@ function onAddTextLine() {
 }
 
 function onSwitchLine() {
+    if (gMeme.selectedLineIdx < 0) { gMeme.selectedLineIdx = 0 };
 
     gMeme.selectedLineIdx += 1;
     if (gMeme.selectedLineIdx === gMeme.lines.length) { gMeme.selectedLineIdx = 0 };

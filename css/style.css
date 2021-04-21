@@ -46,6 +46,8 @@ canvas{
     display: flex;
     justify-content: center;
     margin-bottom: 1em;
+    display: none;
+
     
 }
 
@@ -103,6 +105,7 @@ border-radius: 1em;
     width: 150px;
     font-family: lato-bold, sans-serif;
     font-size: 1rem;
+    margin-bottom: 1em;
     
     }
 
@@ -142,7 +145,10 @@ button{
         flex-direction: column;
         justify-content: wrap;
         align-items: center;
+        justify-content:center;
         margin-bottom: 1em;
+        display: none;
+
     }
 
     .text-editor{
@@ -181,6 +187,16 @@ button{
        background-image: url(https://p1.pxfuel.com/preview/145/640/25/flowers-background-nature-pink-color.jpg);
        background-size: cover; 
        border-radius: 30px;
+    }
+
+    .long-btn{
+
+        margin-bottom: 0.2em;
+
+    }
+
+    .return{
+        background: rgb(238, 245, 141);
     }
 
     
