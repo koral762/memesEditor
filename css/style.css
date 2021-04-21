@@ -2,8 +2,36 @@
     box-sizing: border-box;
 }
 
+
+/* TYPOGRAPHY */
+
+@font-face {
+    font-family: champagne-limousines;
+    src: url(../fonts/champagne-limousines/Champagne-Limousines-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: eurofurence;
+    src: url(../fonts/eurofurence/Eurofurence-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: lato-bold;
+    src: url(../fonts/lato/Lato-Bold.ttf);
+  }
+  
+  @font-face {
+    font-family: lato-regular;
+    src: url(../fonts/lato/Lato-Regular.ttf);
+  }
+
+
+body{
+   background-image: url(https://p0.pxfuel.com/preview/159/799/726/various-background-backgrounds.jpg);
+}
+
 header{
-    background-color: rgb(218, 14, 14);
+    background-color: rgb(211, 76, 105);
     height: 50px;
     margin-bottom: 1em;
 }
@@ -11,64 +39,148 @@ header{
 canvas{
     border: 2px solid black;
     border-radius: 20px;
+    margin-right: 1em;
 }
 
 .canvas-container{
     display: flex;
     justify-content: center;
     margin-bottom: 1em;
+    
 }
 
+.task-container{
+    border-radius: 30px;
+    padding: 1em;
+    border: 2px solid black;
+    background-image: url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/pf-s52-ted-3820-eye-01.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=31a2926809ca4740852829639db81090);
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position-x: -2.5em;
+}
 
-.image-gallery{
+.input-text{
+border-radius: 1em;
+}
+
+.logo {
+    font-family: eurofurence, sans-serif;
+    font-size: 2.5rem;
+    user-select: none;
+    color:antiquewhite;
+  }
+
+  .gallery-header{
 
     display: flex;
-    justify-content: wrap;
-}
+    justify-content:center;
+    align-items:center;
 
+  }
+  
+  
+  .image-gallery{
+      
+      display: flex;
+      justify-content: wrap;
+    }
+    
+    
+    
+    .image-container img{
+        width: 200px;
+        height: 200px;
+        cursor: pointer;
+        margin-inline-end: 1em;
+        border-radius: 1em;
+    }
+    
+    .buttons{
+        margin-top: 0.5em;
+    }
 
-
-.image-container img{
-    width: 200px;
-    height: 200px;
-    cursor: pointer;
-    margin-inline-end: 1em;
-    border-radius: 1em;
-}
-
-.buttons{
-    margin-top: 0.5em;
-}
+    .long-btn{
+    width: 150px;
+    font-family: lato-bold, sans-serif;
+    font-size: 1rem;
+    
+    }
 
 button{
     cursor: pointer;
+    background-color: rgb(247, 155, 205);
     width: 2em;
     height: 2em;
     padding: 0;
+    border-radius: 30px;
+}
+
+
+.save-meme{
+
+    display: flex;
+    flex-direction:column;
 }
 
 @media (max-width: 450px){
     
+  
+
     header{
-        background-color: rgb(14, 218, 31);
+        background-color: rgba(227, 112, 231, 0.315);
+      
+        text-align: center;
     }
     
     canvas{
-        height: 300px;
-        width: 300px;
+        height: 250px;
+        width: 250px;
     }
     
     .canvas-container{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: wrap;
         align-items: center;
         margin-bottom: 1em;
+    }
+
+    .text-editor{
+
+        display: flex;
+    }
+
+    .text-and-save-container{
+
+        display: flex;
+        justify-content:wrap;
     }
 
     .image-container img{
         width: 100px;
         height: 100px;
+    }
+
+    .task-container{
+        border-radius: 30px;
+        padding: 1em;
+        border: 2px solid black;
+        background-color: rgba(245, 189, 126, 0.829);
+        background-image: url();
+        background-repeat:no-repeat;
+        background-size: cover;
+        background-position-x: -2.5em;
+    }
+
+
+    button{
+        cursor: pointer;
+        width: 2em;
+        height: 2em;
+        padding: 0;
+       background-image: url(https://p1.pxfuel.com/preview/145/640/25/flowers-background-nature-pink-color.jpg);
+       background-size: cover; 
+       border-radius: 30px;
     }
 
     

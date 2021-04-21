@@ -133,7 +133,6 @@ var gMeme = {
     ]
 }
 
-
 function oninit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
@@ -172,6 +171,7 @@ function onImageClicked(imgId) {
 
     gMeme.selectedImgId = parseInt(imgId);
     renderImgToCanvas(gMeme.selectedImgId);
+
     setTimeout(() => {
         renderText()
     }, 200);
@@ -283,18 +283,16 @@ function onDownloadImg() {
     clearSelected();
 
     setTimeout(() => {
-        downloadimg();
+        downloadimg()
     }, 1000);
-
-
 }
 
-function downloadimg(){
-    
+function downloadimg() {
+
     var download = document.getElementById("download");
     var image = document.getElementById("my-canvas").toDataURL("image/png")
         .replace("image/png", "image/octet-stream");
-    
+
     download.setAttribute("href", image);
 
 }
@@ -304,8 +302,8 @@ function clearSelected() {
     renderCanvas();
 }
 
-function onEdit(){
-    
+function onEdit() {
+
     gMeme.selectedLineIdx = 0;
     renderCanvas();
 
